@@ -1,5 +1,5 @@
 import streamlit as st
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 import time
 
 # Symptom advice dictionary (expand as needed)
@@ -25,7 +25,10 @@ RISK_QUESTIONS = [
 ]
 
 def greet():
-    current_hour = datetime.now().hour
+    # Singapore is UTC +8
+    sg_timezone = timezone(timedelta(hours=8))
+    current_hour = datetime.now(sg_timezone).hour
+    
     if current_hour < 12:
         time_greeting = "🌅 Good morning"
     elif current_hour < 18:
@@ -154,3 +157,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
